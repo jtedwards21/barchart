@@ -14,19 +14,21 @@ var yScale = d3.scaleLinear()
 .domain([0, gdpMax])
 .range([0,960]);
 
+var xScaleValue = width/(data.length)
+var barWidth = xScaleValue * .8
 
 d3.select("svg")
 .selectAll("rect")
 .data(data)
 .enter()
 .append("rect")
-.attr("width", 10)
+.attr("width", barWidth)
 .attr("height", function(d){return yScale(d[1]);})
 .style("fill", "blue")
 .style("stroke","red")
 .style("stroke-width", "1px")
 .style("opacity", .25)
-.attr("x", function(d,i){return i *12})
+.attr("x", function(d,i){return i * xScaleValue})
 /*.attr("y", function(d) {
 
 var l = height - yScale(d[1])
