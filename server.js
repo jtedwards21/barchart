@@ -1,9 +1,14 @@
 var express = require('express')
-var app = express()
+var routes = require('./app/routes/index.js')
+var pug = require('pug')
 
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-})
+var app = express()
+app.use('/public', express.static(process.cwd() + '/public'));
+app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
+
+routes(app)
+
+//var compiledPug = pug.compileFile('template')
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
