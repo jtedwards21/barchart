@@ -31,8 +31,10 @@ var yScale = d3.scaleLinear()
 var xScale = d3.scaleTime().domain([minDate, maxDate]).range([0, width])
 var barWidth = width/data.length
 
-var xAxis = d3.axisBottom().scale(xScale).ticks(d3.timeYear, 5);
-var yAxis = d3.axisLeft().scale(yScale).ticks(10, "");
+var secondYScale = d3.scaleLinear().domain([0, gdpMax]).range([height, 0])
+
+var xAxis = d3.axisBottom().scale(xScale).ticks(d3.timeYear.every(5));
+var yAxis = d3.axisLeft().scale(secondYScale);
 
 d3.select('svg')
 .attr("width", width + margin.left + margin.right)
@@ -53,9 +55,18 @@ d3.select('#g-cont')
 
 //Add y axis
 
+d3.select("#g-cont")
+.append("g")
+.attr("class", "y-axis")
+.call(yAxis)
 
 
 //Add a tooltip?
+
+var div= d3.select(".box").append("div")
+.attr("class", "tooltip")
+.style("opacity", 0)
+
 
 //Generate Graph with elements
 
@@ -66,13 +77,25 @@ d3.select("#g-cont")
 .append("rect")
 .attr("width", barWidth)
 .attr("height", function(d){return yScale(d[1]);})
-.style("fill", "blue")
-.style("stroke","red")
+.style("fill", "black")
+.style("stroke","black")
 .style("stroke-width", "1px")
-.style("opacity", .25)
+.style("opacity", .5)
 .attr("x", function(d,i){return xScale(new Date(d[0]))})
 .attr("y", function(d) {return　height - yScale(d[1])})
+.on("mouseover", function(d){
+var rect = d3.select(this);
+rect.attr("class", "mouseover")
+var currentDateTime = new Date(d[0])
+var year = currentDateTime.getFullYear();
+var month = currentDateTime.getMonth()
+var dollars = d[1];
+div.style("opacity", .9)
+div.html("<span class='amount'>" + dollars + "&nbsp;Billion </span><br><span class='year'>" + year + ' - ' + month + "</span>")
+.style("left", (d3.event.pageX + 5) + "px")
+.style("top", (d3.event.pageY - 50) + "px");
 
+})
 })
 
 

@@ -1,13 +1,10 @@
 body {
-  background-color: #eee;
+  background-color: #7F7E3C;
 }
 
-svg {
-  background-color: #fff;
-}
 
 #bar-chart {
-  background-color: white;
+  background-color: #FFFB46;
 }
 
 .graph-title {
@@ -31,7 +28,7 @@ svg {
 }
 
 .box {
-  background-color: white;
+  background-color: #FFFB46;
   margin: 40px auto;
   padding: 0px;
   width: 1250px;
@@ -45,4 +42,18 @@ svg {
   font-weight: 300;
   text-align: center;
   padding: 0px;
+}
+
+.tooltip {
+  position: absolute;
+  text-align: left;
+  width: auto;
+  height: auto;
+  padding: 3px 5px 3px 5px;
+  font: 1em sans-serif;
+  border: 0px;
+  border-radius: 5px;
+  pointer-events: none;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+  background-color: lightsteelblue;
 }
