@@ -8,7 +8,6 @@ app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 
 routes(app)
 
-//var compiledPug = pug.compileFile('template')
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
